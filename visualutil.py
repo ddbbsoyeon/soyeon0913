@@ -12,7 +12,15 @@
                         
                         
                         
+                        
     if 'person' in self.e_list:
+        fence = intr.fence()
+        fence.fence_check(self.fxy_list, self.frame)
+        if(fence.fence_warning):
+            print("제한 구역 침입을 감지했습니다. 알림을 전송합니다.\n")
+            fence.fence_warning = False
+        else:
+            print("제한 구역 침입을 감지되지 않았습니다. 알림을 전송합니다.\n")
         if trackers.isFirst or counter%15 == 0:
                 try:
                     trackers.settings(detection.fxy_list, detection.frame)
@@ -29,3 +37,13 @@
                  except Exception as e:
                      print(str(e))
                      continue
+        else:
+            trackers.isFirst = True
+        
+        
+        
+cv2.line(detection.frame, (detection.colist[0], detection.colist[1]), (detection.colist[2], detection.colist[3]),
+             (255, 0, 0), 2)
+
+
+
