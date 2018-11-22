@@ -15,6 +15,7 @@
                         
     if 'person' in self.e_list:
         fence = intr.fence()
+        trackers = multitracker.multitracker()
         fence.fence_check(self.fxy_list, self.frame)
         if(fence.fence_warning):
             print("제한 구역 침입을 감지했습니다. 알림을 전송합니다.\n")
@@ -34,8 +35,7 @@
                      trackers.updatebox(detection.frame)
                      #tracker.update(detection.frame, detection.ret)
                      counter = counter + 1
-                 except Exception as e:
-                     print(str(e))
+                 except:
                      continue
         else:
             trackers.isFirst = True
